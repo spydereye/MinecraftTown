@@ -25,8 +25,17 @@ public class StructureLayoutGen {
 
     public static void placeStructure(ServerLevel world, BlockPos pos, String structureName) {
         // Load the structure
-        StructureTemplate template = world.getStructureManager().get(new ResourceLocation(ExampleMod.MOD_ID, structureName));
+        ResourceLocation location = ResourceLocation.tryBuild(ExampleMod.MOD_ID, structureName);
+        if (location != null) {
+            // Get an Optional<StructureTemplate> from the StructureManager
+            Optional<StructureTemplate> templateOptional = world.getStructureManager().get(location);
 
+            // Check if the structure template is present
+            if (templateOptional.isPresent()) {
+                // Extract the StructureTemplate from the Optional
+                StructureTemplate template = templateOptional.get();
+            }
+        }
         if (template != null) {
             // Place the structure at the given position
             template.placeInWorld(
