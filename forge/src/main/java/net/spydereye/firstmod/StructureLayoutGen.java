@@ -15,6 +15,8 @@ import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.Optional;
+
 public class StructureLayoutGen {
 
     public static final DeferredRegister<MapCodec<? extends StructureModifier>> STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_MODIFIER_SERIALIZERS, ExampleMod.MOD_ID);
@@ -26,6 +28,7 @@ public class StructureLayoutGen {
     public static void placeStructure(ServerLevel world, BlockPos pos, String structureName) {
         // Load the structure
         ResourceLocation location = ResourceLocation.tryBuild(ExampleMod.MOD_ID, structureName);
+        StructureTemplate template = null;
         if (location != null) {
             // Get an Optional<StructureTemplate> from the StructureManager
             Optional<StructureTemplate> templateOptional = world.getStructureManager().get(location);
@@ -33,7 +36,7 @@ public class StructureLayoutGen {
             // Check if the structure template is present
             if (templateOptional.isPresent()) {
                 // Extract the StructureTemplate from the Optional
-                StructureTemplate template = templateOptional.get();
+                template = templateOptional.get();
             }
         }
         if (template != null) {
