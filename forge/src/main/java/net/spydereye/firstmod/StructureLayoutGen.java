@@ -24,31 +24,37 @@ public class StructureLayoutGen {
     public static void register(IEventBus eventBus) {
         STRUCTURES.register(eventBus);
     }
-
+    public static boolean HasPlacedStructure = false;
     public static void placeStructure(ServerLevel world, BlockPos pos, String structureName) {
         // Load the structure
         ResourceLocation location = ResourceLocation.tryBuild(ExampleMod.MOD_ID, structureName);
         StructureTemplate template = null;
         if (location != null) {
+
             // Get an Optional<StructureTemplate> from the StructureManager
             Optional<StructureTemplate> templateOptional = world.getStructureManager().get(location);
 
             // Check if the structure template is present
             if (templateOptional.isPresent()) {
                 // Extract the StructureTemplate from the Optional
+
                 template = templateOptional.get();
             }
         }
         if (template != null) {
             // Place the structure at the given position
+
             template.placeInWorld(
                     world,
                     pos,
                     pos,
-                    new StructurePlaceSettings(),
+                    new StructurePlaceSettings().setIgnoreEntities(false),
                     world.random,
                     2  // Set a flag (2 means force block updates)
             );
+
         }
+
+
     }
 }
