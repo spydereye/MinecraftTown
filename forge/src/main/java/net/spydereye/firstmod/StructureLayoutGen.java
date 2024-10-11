@@ -14,6 +14,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import java.lang.reflect.*;
 
 import java.util.Optional;
 
@@ -34,11 +35,14 @@ public class StructureLayoutGen {
             // Get an Optional<StructureTemplate> from the StructureManager
             Optional<StructureTemplate> templateOptional = world.getStructureManager().get(location);
 
+
             // Check if the structure template is present
             if (templateOptional.isPresent()) {
+                System.out.println("this structure has been found!: " + location);
                 // Extract the StructureTemplate from the Optional
-
                 template = templateOptional.get();
+            }
+            else{
             }
         }
         if (template != null) {

@@ -12,11 +12,11 @@ public class WorldGenHandler {
 
     @SubscribeEvent
     public static void onChunkGenerated(ChunkEvent.Load event) {
-        if (event.getLevel() instanceof ServerLevel && !StructureLayoutGen.HasPlacedStructure) {
+        if (event.getLevel() instanceof ServerLevel) {
             ServerLevel Thisworld = (ServerLevel) event.getLevel();
             BlockPos pos = new BlockPos(500, 100, 20);
             // Call placeStructure after chunk generation
-            StructureLayoutGen.placeStructure(Thisworld,pos , "sickhouse.nbt");
+            StructureLayoutGen.placeStructure(Thisworld, pos , "sickhouse");
         }
     }
 }
