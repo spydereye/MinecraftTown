@@ -9,14 +9,16 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraft.server.level.ServerLevel;
 @Mod.EventBusSubscriber(modid = ExampleMod.MOD_ID)
 public class WorldGenHandler {
-
+    private static BlockPos pos = new BlockPos(500, 100, 20);
     @SubscribeEvent
     public static void onChunkGenerated(ChunkEvent.Load event) {
         if (event.getLevel() instanceof ServerLevel) {
             ServerLevel Thisworld = (ServerLevel) event.getLevel();
-            BlockPos pos = new BlockPos(500, 100, 20);
+
             // Call placeStructure after chunk generation
             StructureLayoutGen.placeStructure(Thisworld, pos , "sickhouse");
+            StructureLayoutGen.HasPlacedStructure = true;
         }
+
     }
 }

@@ -30,29 +30,28 @@ public class StructureLayoutGen {
         // Load the structure
         ResourceLocation location = ResourceLocation.tryBuild(ExampleMod.MOD_ID, structureName);
         StructureTemplate template = null;
-        if (location != null) {
+        if (location != null && !HasPlacedStructure) {
 
             // Get an Optional<StructureTemplate> from the StructureManager
-            Optional<StructureTemplate> templateOptional = world.getStructureManager().get(location);
+            Optional<StructureTemplate> templateOptional = Optional.of(world.getStructureManager().getOrCreate(location));
 
 
             // Check if the structure template is present
             if (templateOptional.isPresent()) {
-                System.out.println("this structure has been found!: " + location);
+
                 // Extract the StructureTemplate from the Optional
                 template = templateOptional.get();
             }
-            else{
-            }
+
         }
-        if (template != null) {
+        if (template != null ) {
             // Place the structure at the given position
 
             template.placeInWorld(
                     world,
                     pos,
                     pos,
-                    new StructurePlaceSettings().setIgnoreEntities(false),
+                    new StructurePlaceSettings(),
                     world.random,
                     2  // Set a flag (2 means force block updates)
             );
