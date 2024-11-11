@@ -21,6 +21,7 @@ import net.minecraft.server.level.ServerLevel;
 @Mod(ExampleMod.MOD_ID)
 public class ExampleMod
 {
+    public StructureLayoutGen SLG;
 
     // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "firstmod";
@@ -56,6 +57,8 @@ public class ExampleMod
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
     {
+
+
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent

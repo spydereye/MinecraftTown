@@ -1,6 +1,7 @@
 package net.spydereye.firstmod;
 
 import com.mojang.serialization.MapCodec;
+import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -25,12 +26,12 @@ public class StructureLayoutGen {
     public static void register(IEventBus eventBus) {
         STRUCTURES.register(eventBus);
     }
-    public static boolean HasPlacedStructure = false;
+
     public static void placeStructure(ServerLevel world, BlockPos pos, String structureName) {
         // Load the structure
         ResourceLocation location = ResourceLocation.tryBuild(ExampleMod.MOD_ID, structureName);
         StructureTemplate template = null;
-        if (location != null && !HasPlacedStructure) {
+        if (location != null ) {
 
             // Get an Optional<StructureTemplate> from the StructureManager
             Optional<StructureTemplate> templateOptional = Optional.of(world.getStructureManager().getOrCreate(location));
@@ -46,16 +47,16 @@ public class StructureLayoutGen {
         }
         if (template != null ) {
             // Place the structure at the given position
+            System.out.println("The structure has been placed!");
 
-            template.placeInWorld(
+            template.fillFromWorld(
                     world,
                     pos,
-                    pos,
-                    new StructurePlaceSettings(),
-                    world.random,
-                    2  // Set a flag (2 means force block updates)
+                    template.getSize(),
+                    true,
+                    null// Set a flag (2 means force block updates)
             );
-
+            System.out.println(template.placeInWorld(world,pos, pos, new StructurePlaceSettings(), world.random, 2));
         }
 
 
