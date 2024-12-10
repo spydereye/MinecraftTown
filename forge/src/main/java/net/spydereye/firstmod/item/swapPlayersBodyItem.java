@@ -45,7 +45,7 @@ public class swapPlayersBodyItem extends Item {
         return super.use(world, player, hand);
     }
 
-    public static LivingEntity getLookedAtEntity(Player player, double range) {
+    public LivingEntity getLookedAtEntity(Player player, double range) {
         Vec3 start = new Vec3(player.getX(), player.getEyeY(), player.getZ());
         System.out.println(start);// Player's eye position
         Vec3 lookVector = player.getLookAngle().scale(range);
@@ -68,7 +68,7 @@ public class swapPlayersBodyItem extends Item {
 
 
         // Loop through each living entity in the bounding box
-        for (LivingEntity entity : player.level().getEntitiesOfClass(player, aabb) {
+        for (LivingEntity entity : player.level().getEntitiesOfClass(LivingEntity.class,aabb)) {
             if (entity != player) {
                 // Calculate distance from player to entity
                 double distanceToEntity = start.distanceTo(entity.position());
