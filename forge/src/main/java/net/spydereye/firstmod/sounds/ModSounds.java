@@ -17,6 +17,7 @@ public class ModSounds
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, firstmod.MOD_ID);
 
     public static final RegistryObject<SoundEvent> BOOGIE_WOOGIE_CLAP = registerSoundEvent("boogiewoogieclap");
+    public static final RegistryObject<SoundEvent> LOCUS_WATER = registerSoundEvent("locuswatermusic");
 
 
 

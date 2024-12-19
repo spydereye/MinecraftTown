@@ -20,6 +20,7 @@ import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import java.util.List;
 import java.util.OptionalLong;
 import net.spydereye.firstmod.*;
+import net.spydereye.firstmod.worldgen.dimension.biome.ModBiomes;
 
 public class ModDimensions {
     public static final ResourceKey<LevelStem> KAUPENDIM_KEY = ResourceKey.create(Registries.LEVEL_STEM,
@@ -34,13 +35,13 @@ public class ModDimensions {
         context.register(KAUPEN_DIM_TYPE, new DimensionType(
                 OptionalLong.of(12000), // fixedTime
                 true, // hasSkylight
-                true, // hasCeiling
+                false, // hasCeiling
                 false, // ultraWarm
                 false, // natural
                 1.0, // coordinateScale
                 true, // bedWorks
                 false, // respawnAnchorWorks
-                0, // minY
+                -64, // minY
                 256, // height
                 256, // logicalHeight
                 BlockTags.INFINIBURN_OVERWORLD, // infiniburn
@@ -55,8 +56,8 @@ public class ModDimensions {
         HolderGetter<NoiseGeneratorSettings> noiseGenSettings = context.lookup(Registries.NOISE_SETTINGS);
 
         NoiseBasedChunkGenerator wrappedChunkGenerator = new NoiseBasedChunkGenerator(
-                new FixedBiomeSource(biomeRegistry.getOrThrow(Biomes.PLAINS)),
-                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.CAVES));
+                new FixedBiomeSource(biomeRegistry.getOrThrow(ModBiomes.TEST_BIOME)),
+                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD));
 
         NoiseBasedChunkGenerator noiseBasedChunkGenerator = new NoiseBasedChunkGenerator(
                 MultiNoiseBiomeSource.createFromList(
@@ -70,7 +71,7 @@ public class ModDimensions {
                         ))),
                 noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD));
 
-        LevelStem stem = new LevelStem(dimTypes.getOrThrow(ModDimensions.KAUPEN_DIM_TYPE), noiseBasedChunkGenerator);
+        LevelStem stem = new LevelStem(dimTypes.getOrThrow(ModDimensions.KAUPEN_DIM_TYPE), wrappedChunkGenerator);
 
         context.register(KAUPENDIM_KEY, stem);
     }

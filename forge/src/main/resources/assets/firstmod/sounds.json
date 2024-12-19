@@ -4,5 +4,14 @@
     "sounds": [
       "firstmod:boogiewoogieclap"
     ]
+  },
+  "locuswatermusic": {
+    "sounds": [
+      {
+        "name": "firstmod.locuswatermusic",
+        "stream": true,
+        "volume": 1
+      }
+    ]
   }
 }
