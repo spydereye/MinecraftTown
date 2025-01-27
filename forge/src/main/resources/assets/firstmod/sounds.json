@@ -8,7 +8,7 @@
   "locuswatermusic": {
     "sounds": [
       {
-        "name": "firstmod.locuswatermusic",
+        "name": "firstmod:locuswatermusic",
         "stream": true,
         "volume": 1
       }

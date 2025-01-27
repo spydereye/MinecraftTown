@@ -57,7 +57,7 @@ public class ModDimensions {
 
         NoiseBasedChunkGenerator wrappedChunkGenerator = new NoiseBasedChunkGenerator(
                 new FixedBiomeSource(biomeRegistry.getOrThrow(ModBiomes.TEST_BIOME)),
-                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD));
+                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.FLOATING_ISLANDS));
 
         NoiseBasedChunkGenerator noiseBasedChunkGenerator = new NoiseBasedChunkGenerator(
                 MultiNoiseBiomeSource.createFromList(
